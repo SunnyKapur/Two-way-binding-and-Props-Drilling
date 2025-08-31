@@ -30,8 +30,8 @@ const Create = (props) => {
     padding: "5px 10px",
     backgroundColor: "orange",
     border: "1px solid white",
-    borderRadius: "10px"
-  }
+    borderRadius: "10px",
+  };
 
   return (
     <>
@@ -43,6 +43,7 @@ const Create = (props) => {
           type="text"
           placeholder="title"
         />
+        <br />
         <br />
         <br />
         <button style={buttoncss}>Create Todo</button>
