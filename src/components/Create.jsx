@@ -25,6 +25,14 @@ const Create = (props) => {
     settitle("");
   };
 
+  const buttoncss = {
+    // color: "black",
+    padding: "5px 10px",
+    backgroundColor: "orange",
+    border: "1px solid white",
+    borderRadius: "10px"
+  }
+
   return (
     <>
       <h1>Create tasks</h1>
@@ -37,7 +45,7 @@ const Create = (props) => {
         />
         <br />
         <br />
-        <button>Create Todo</button>
+        <button style={buttoncss}>Create Todo</button>
       </form>
     </>
   );
