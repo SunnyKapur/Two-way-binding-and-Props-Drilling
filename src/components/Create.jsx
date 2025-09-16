@@ -1,54 +1,38 @@
-import { nanoid } from "nanoid";
 import { useState } from "react";
 
 const Create = (props) => {
-  const todos = props.todos;
-  const settodos = props.settodos;
+    console.log(props); 
 
-  const [title, settitle] = useState("");
+  const [fullname, setfullname] = useState("");
+  const [age, setage] = useState();
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-
-    const newtodo = {
-      id: nanoid(),
-      title: title,
-      isCompleted: false,
-    };
-
-    let copytodos = [...todos];
-    copytodos.push(newtodo);
-    settodos(copytodos);
-
-    // settodos([...todos, newtodo])
-
-    settitle("");
-  };
-
-  const buttoncss = {
-    // color: "black",
-    padding: "5px 10px",
-    backgroundColor: "orange",
-    border: "1px solid white",
-    borderRadius: "10px",
+    const newuser = { fullname, age };
+    console.log(newuser); // api, backend ,data
+    // set the user in the setusers
   };
 
   return (
-    <>
-      <h1>Create tasks</h1>
+    <div>
+      <h1>Register User</h1>
       <form onSubmit={SubmitHandler}>
         <input
-          onChange={(e) => settitle(e.target.value)}
-          value={title}
+          onChange={(e) => setfullname(e.target.value)}
+          value={fullname}
           type="text"
-          placeholder="title"
+          placeholder="Full Name"
         />
-        <br />
-        <br />
-        <br />
-        <button style={buttoncss}>Create Todo</button>
+
+        <input
+          onChange={(e) => setage(e.target.value)}
+          value={age}
+          type="number"
+          placeholder="Age"
+        />
+        <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 };
 

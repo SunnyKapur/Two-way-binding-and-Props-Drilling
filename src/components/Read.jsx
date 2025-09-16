@@ -1,26 +1,16 @@
-import { Fragment } from "react";
-
 const Read = (props) => {
-  const todos = props.todos;
-  const settodos = props.settodos;
+  const users = props.users;
+  // const setusers = props.setusers
 
-  const rendertodos = todos.map((todo) => {
-    return (
-      <li
-        style={{ color: todo.isCompleted ? "green" : "purple" }}
-        key={todo.id}
-      >
-        {todo.title}
-      </li>
-    );
+  const renderuser = users.map((user, index) => {
+    return <li key={index}>{user.name}</li>;
   });
 
   return (
-    <Fragment>
-      <h1 style={{ color: "tomato" }}>Pending Todos</h1>
-      <ol>{rendertodos}</ol>
-    </Fragment>
+    <div>
+      <h1>User Data</h1>
+      <ol>{renderuser} </ol>
+    </div>
   );
 };
-
 export default Read;

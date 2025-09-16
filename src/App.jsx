@@ -3,15 +3,17 @@ import Create from "./components/Create";
 import Read from "./components/Read";
 
 const App = () => {
-  const [todos, settodos] = useState([
-    { id: 1, title: "kaam karle bhai", isCompleted: true },
+  const [users, setusers] = useState([
+    { name: "John", age: 12 },
+    { name: "ankur", age: 32 },
+    { name: "sunny", age: 22 },
   ]);
 
   return (
-    <>
-      <Create todos={todos} settodos={settodos} />
-      <Read todos={todos} settodos={settodos} />
-    </>
+    <div>
+      <Create />
+      <Read users={users} setusers={setusers}/>
+    </div>
   );
 };
 
