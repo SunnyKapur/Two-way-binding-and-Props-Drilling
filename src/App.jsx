@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useState } from "react";
 
 const App = () => {
@@ -6,13 +7,31 @@ const App = () => {
   ]);
 
   const [title, settitle] = useState("");
-  const [completed, setcompleted] = useState(true);
-  const [gender, setgender] = useState("male");
-  const [city, setcity] = useState("mumbai")
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    const newtodo = {
+      id: nanoid(),
+      title: title,
+      isCompleted: false,
+    };
+    const copytodos = [...todos];
+    copytodos.push(newtodo);
+    settodos(copytodos);
+
+    // settodos([...todos, newtodo]);
+
+    settitle("");
+  };
+
+  const rendertodos = todos.map((todo) => {
+    return <li key={todo.id}>{todo.title}</li>;
+  });
+
   return (
     <div>
       <h1>Create Tasks</h1>
-      <form>
+      <form onSubmit={SubmitHandler}>
         <input
           onChange={(e) => settitle(e.target.value)}
           value={title}
@@ -21,38 +40,11 @@ const App = () => {
         />
         <br />
         <br />
-        <input
-          checked={completed}
-          type="checkbox"
-          onChange={(e) => setcompleted(e.target.checked)}
-        />
-        Completed
-        <br />
-        <br />
-        <input
-        checked={gender == "male" && true}
-          value="male"
-          onChange={(e) => setgender(e.target.value)}
-          type="radio"
-        />
-        male
-        <input
-          checked={gender == "female" && true}
-          value="female"
-          onChange={(e) => setgender(e.target.value)}
-          type="radio"
-        />
-        Female
-        <br />
-        <br />
-        <select value={city} onChange={(e) => setcity(e.target.value)}>
-          <option value="delhi">Delhi</option>
-          <option value="mumbai">Mumbai</option>
-          <option value="kolkata">Kolkata</option>
-        </select>
-        <br /><br />
         <button>Create Todo</button>
       </form>
+      <hr />
+      <h1>Panding Todos</h1>
+      <ol>{rendertodos}</ol>
     </div>
   );
 };
