@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import style from "./Read.module.css";
 
 const Read = (props) => {
@@ -8,13 +9,14 @@ const Read = (props) => {
   const DeleteHandler = (id) => {
     const filtedtodo = todos.filter((todo) => todo.id != id);
     settodos(filtedtodo);
+    toast.error("Todo deleted!")
   };
 
   const rendertodos = todos.map((todo) => {
     return (
       <li key={todo.id} className="mb-2 flex justify-between items-center p-4 bg-gray-800 rounded">
         <span className="text-xl font-thin">{todo.title}</span>
-        <button className="font-thin text-sm text-red-4j00" onClick={() => DeleteHandler(todo.id)}>Delete</button>
+        <button className="font-thin text-sm text-red-400" onClick={() => DeleteHandler(todo.id)}>Delete</button>
       </li>
     );
   });

@@ -1,41 +1,54 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Create = (props) => {
   const todos = props.todos;
   const settodos = props.settodos;
 
-  const [title, settitle] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const SubmitHandler = (e) => {
-    e.preventDefault();
-    const newtodo = {
-      id: nanoid(),
-      title: title,
-      isCompleted: true,
-    };
+  const SubmitHandler = (data) => {
+    data.isCompleted = false;
+    data.id = nanoid();
+
     const copytodos = [...todos];
-    copytodos.push(newtodo);
+    copytodos.push(data);
     settodos(copytodos);
 
-    // settodos([...todos, newtodo]);
+    toast.success("Todo created")
 
-    settitle("");
+    reset();
   };
+
   return (
     <div className="w-[65%] p-10">
-      <h1 className="mb-10 text-5xl font-thin">Set <span className="text-red-400">Reminder</span> for <br />tasks</h1>
-      <form onSubmit={SubmitHandler}>
+      <h1 className="mb-10 text-5xl font-thin">
+        Set <span className="text-red-400">Reminder</span> for <br />
+        tasks
+      </h1>
+      <form onSubmit={handleSubmit(SubmitHandler)}>
         <input
+          {...register("title", {
+            required: "title can not be empty",
+          })}
           className="p-2 border-b w-full text-2xl font-thin outline-0"
-          onChange={(e) => settitle(e.target.value)}
-          value={title}
           type="text"
           placeholder="title"
         />
+        
+       <small className="font-thin text-red-400"> {errors?.title?.message}</small>
+
         <br />
         <br />
-        <button className="mt-5 text-xl px-10 py-2 border rounded">Create Todo</button>
+        <button className="mt-5 text-xl px-10 py-2 border rounded">
+          Create Todo
+        </button>
       </form>
     </div>
   );
